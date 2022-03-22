@@ -1,46 +1,38 @@
-import { Bloc, Colletion, Container } from "./styles";
-import pika from "../../assets/manectric.png";
+import { Bloc, Container, Person } from "./styles";
+import jade from "../../assets/rosto1.png";
 
 export function Plays() {
     return (
         <Container>
             <Bloc>
                 <div>
-                    <h2>Jade</h2>
-                    <Colletion>
-                        <img src={pika} alt="pokemon" width="100" height="150" />
-                        <img src={pika} alt="pokemon" width="100" height="150" />
-                        <img src={pika} alt="pokemon" width="100" height="150" />
-                    </Colletion>
+                    <Person>
+                        <h2>Jade</h2>
+                        <img src={jade} alt="jade" />
+                    </Person>
                 </div>
                 <div>
-                    <h2>Lais</h2>
-                    <Colletion>
-                        <img src={pika} alt="pokemon" width="100" height="150" />
-                        <img src={pika} alt="pokemon" width="100" height="150" />
-                        <img src={pika} alt="pokemon" width="100" height="150" />
-                    </Colletion>
+                    <Person>
+                        <h2>Lais</h2>
+                        <img src={jade} alt="jade" />
+                    </Person>
                 </div>
                 <div>
-                    <h2>Rodrigo</h2>
-                    <Colletion>
-                        <img src={pika} alt="pokemon" width="100" height="150" />
-                        <img src={pika} alt="pokemon" width="100" height="150" />
-                        <img src={pika} alt="pokemon" width="100" height="150" />
-                    </Colletion>
+                    <Person>
+                        <h2>Rodrigo</h2>
+                        <img src={jade} alt="jade" />
+                    </Person>
                 </div>
                 <div>
-                    <h2>Luana</h2>
-                    <Colletion>
-                        <img src={pika} alt="pokemon" width="100" height="150" />
-                        <img src={pika} alt="pokemon" width="100" height="150" />
-                        <img src={pika} alt="pokemon" width="100" height="150" />
-                    </Colletion>
+                    <Person>
+                        <h2>Luana</h2>
+                        <img src={jade} alt="jade" />
+                    </Person>
                 </div>
             </Bloc>
             <div>
                 <button type="button" >
-                    Trocar
+                    Selecionar
                 </button>
             </div>
 
