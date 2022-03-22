@@ -2,10 +2,9 @@ import styled from "styled-components";
 
 export const Container = styled.div`
    display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-button {
+    align-items: center;
+    flex-direction: column;
+  button {
    font-size: 2rem;
    color: #fff;
    background: var(--color-button);
@@ -34,6 +33,10 @@ export const Bloc = styled.div`
         border-radius: 0.35rem;
         text-align: center;
         width : 300px;
+        transition: 0.2s;
+        &:hover{
+            background: var(--color-secondary-clik);
+        }
     }
 
     h2{
