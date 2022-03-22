@@ -38,9 +38,12 @@ export function Plays() {
                     </Colletion>
                 </div>
             </Bloc>
-            <button type="button" >
-                Trocar
-            </button>
+            <div>
+                <button type="button" >
+                    Trocar
+                </button>
+            </div>
+
         </Container>
     );
 }
