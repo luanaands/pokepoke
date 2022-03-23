@@ -1,13 +1,26 @@
 import { Bloc, Container, Person } from "./styles";
 import jade from "../../assets/rosto1.png";
-
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ModalChange } from "../modalChange";
+import { api } from "../../services/api";
+import { PokemonsProvider } from "../../hooks/usePokemons";
 
+interface Uses {
+    id: number;
+    name: string;
+}
 
 export function Plays() {
     const [isModalChange, setIsModalChange] = useState(false);
-    const [selectedPerson, setSelectedPerson] = useState<string[]>([]);
+    const [selectedPerson, setSelectedPerson] = useState<Uses[]>([]);
+    const [users, setUsers] = useState<Uses[]>([]);
+
+    useEffect(() => {
+        api("/users")
+            .then(response => response)
+            .then(data => setUsers(data.data));
+    }, [])
+
     function handleModalChange() {
         setIsModalChange(true);
     }
@@ -16,14 +29,14 @@ export function Plays() {
         setIsModalChange(false);
     }
 
-    function handleSetSelectedName(name: string) {
+    function handleSetSelectedName(user: Uses) {
         console.log(selectedPerson);
-        if (selectedPerson.includes(name)) {
-            setSelectedPerson(selectedPerson.filter(person => person !== name));
+        if (selectedPerson.includes(user)) {
+            setSelectedPerson(selectedPerson.filter(person => person !== user));
         } else {
             const qtd = selectedPerson.length;
             if (qtd < 2) {
-                setSelectedPerson([...selectedPerson, name]);
+                setSelectedPerson([...selectedPerson, user]);
             }
         }
     }
@@ -31,37 +44,25 @@ export function Plays() {
     return (
         <Container>
             <Bloc>
-                <div>
-                    <Person style={{ background: selectedPerson.includes("Jade") ? "#3466af" : "#1d2c5e" }} onClick={() => handleSetSelectedName("Jade")}>
-                        <h2>Jade</h2>
-                        <img src={jade} alt="jade" />
-                    </Person>
-                </div>
-                <div>
-                    <Person style={{ background: selectedPerson.includes("Lais") ? "#3466af" : "#1d2c5e" }} onClick={() => handleSetSelectedName("Lais")}>
-                        <h2>Lais</h2>
-                        <img src={jade} alt="Lais" />
-                    </Person>
-                </div>
-                <div>
-                    <Person style={{ background: selectedPerson.includes("Rodrigo") ? "#3466af" : "#1d2c5e" }} onClick={() => handleSetSelectedName("Rodrigo")}>
-                        <h2>Rodrigo</h2>
-                        <img src={jade} alt="Rodrigo" />
-                    </Person>
-                </div>
-                <div>
-                    <Person style={{ background: selectedPerson.includes("Luana") ? "#3466af" : "#1d2c5e" }} onClick={() => handleSetSelectedName("Luana")}>
-                        <h2>Luana</h2>
-                        <img src={jade} alt="Luana" />
-                    </Person>
-                </div>
+                {
+                    users.map(user => (
+                        <div key={user.id}>
+                            <Person style={{ background: selectedPerson.includes(user) ? "#3466af" : "#1d2c5e" }} onClick={() => handleSetSelectedName(user)}>
+                                <h2>{user.name}</h2>
+                                <img src={jade} alt={user.name} />
+                            </Person>
+                        </div>
+                    ))
+                }
             </Bloc>
             <div>
-                <button disabled={selectedPerson.length != 2 ? true : false} type="button" onClick={handleModalChange} >
+                <button disabled={selectedPerson.length !== 2 ? true : false} type="button" onClick={handleModalChange} >
                     Selecionar
                 </button>
             </div>
-            <ModalChange names={selectedPerson} isOpen={isModalChange} onRequestClose={handleCloseModalChange} />
+            <PokemonsProvider>
+                <ModalChange users={selectedPerson} isOpen={isModalChange} onRequestClose={handleCloseModalChange} />
+            </PokemonsProvider>
         </Container>
     );
 }

@@ -23,4 +23,8 @@ export const Container = styled.form`
     filter: brightness(0.9);
    }
 }
+button:disabled{ 
+    background:  gray;
+   cursor: none;
+}
 `

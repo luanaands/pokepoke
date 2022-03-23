@@ -18,6 +18,11 @@ font-weight: 500;
     filter: brightness(0.9);
    }
 }
+button:disabled{ 
+    background:  gray;
+   cursor: none;
+}
+
 `
 
 export const Bloc = styled.div`

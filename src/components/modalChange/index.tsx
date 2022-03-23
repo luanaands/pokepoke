@@ -1,17 +1,33 @@
-import { toNamespacedPath } from "path";
-import { useState } from "react";
 import Modal from "react-modal";
+import { usePokemon } from "../../hooks/usePokemons";
 import { Collection } from "../collection";
 import { Container } from "./styles";
 
+interface Users {
+    id: number;
+    name: string;
+}
+
+interface Pokemons {
+    id: number;
+    name: string;
+    userId: number;
+    pokemonId: number;
+    url: string;
+}
+
 interface ModalChangeProps {
-    names: string[];
+    users: Users[];
     isOpen: boolean;
     onRequestClose: () => void;
 }
 
-export function ModalChange({ names, isOpen, onRequestClose }: ModalChangeProps) {
-    const [selectedPokemons, setSelectedPokemons] = useState([]);
+export function ModalChange({ users, isOpen, onRequestClose }: ModalChangeProps) {
+    const { addPokemons, selectedPokemons } = usePokemon();
+
+    function handleSelectedCard(pokemon: Pokemons) {
+        addPokemons(pokemon);
+    }
 
     return (
         <Modal isOpen={isOpen} ariaHideApp={false} onRequestClose={onRequestClose} >
@@ -21,11 +37,14 @@ export function ModalChange({ names, isOpen, onRequestClose }: ModalChangeProps)
                     <p>Fechar</p>
                 </div>
                 {
-                    names.map(name => (
-                        <Collection key={name} name={name} />
+                    users.map(user => (
+                        <Collection key={user.id} user={user} onRequestSelected={handleSelectedCard} />
                     ))
                 }
-                <button>Trocar</button>
+                <button disabled={
+                    selectedPokemons.map(pokemon => pokemon.userId).length < 2 ? true : false
+
+                }>Trocar</button>
             </Container>
         </Modal>
     );

@@ -1,37 +1,42 @@
 import { useEffect, useState } from "react";
+import { api } from "../../services/api";
 import { Card } from "../card";
 import { Container } from "./styles";
 
 interface Pokemons {
     id: number;
     name: string;
+    userId: number;
+    pokemonId: number;
+    url: string;
 }
 
-interface CollectionProps {
+interface Uses {
+    id: number;
     name: string;
 }
 
-export function Collection({ name }: CollectionProps) {
-    const [selectedPokemons, setSelectedPokemons] = useState<number[]>([]);
+interface CollectionProps {
+    user: Uses;
+    onRequestSelected: (pokemon: Pokemons) => void;
+}
+
+export function Collection({ user, onRequestSelected }: CollectionProps) {
     const [pokemons, setPokemons] = useState<Pokemons[]>([]);
 
     useEffect(() => {
-        const poke = {
-            id: 1,
-            name: "Pikachu"
-        }
-        setPokemons([...pokemons, poke]);
-    }, [])
+        api(`/pokemons/${user.id}`)
+            .then(response => response)
+            .then(data => setPokemons(data.data));
+    }, [user])
 
-    function handleSelectedCard(int: number) {
-        console.log(int);
-    }
+
     return (
         <Container>
-            <h3>{name}</h3>
+            <h3>{user.name}</h3>
             <div className="card">
                 {pokemons.map(pokemon => (
-                    <Card key={pokemon.id} pokemon={pokemon} onRequestSelected={() => handleSelectedCard(pokemon.id)} />
+                    <Card key={pokemon.id} pokemon={pokemon} onRequestSelected={() => onRequestSelected(pokemon)} />
                 ))}
             </div>
         </Container>
