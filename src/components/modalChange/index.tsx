@@ -34,12 +34,13 @@ export function ModalChange({ users, isOpen, onRequestClose }: ModalChangeProps)
 
     function onSubmitChange(event: FormEvent) {
         event.preventDefault();
-
-        api.post("/change", { data: selectedPokemons })
-            .then(response => response)
+        api.post("/change", selectedPokemons)
+            .then(response => console.log(response))
             .catch(error => {
                 alert("Não foi possível realizar a troca");
             });
+
+        onRequestClose();
     }
 
     return (
