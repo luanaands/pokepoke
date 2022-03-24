@@ -12,6 +12,12 @@ export const Container = styled.section`
                 display: grid;
                 grid-template-columns: repeat(6, 1fr);
                 gap: 2rem;
+
+                @media (max-width: 720px) {
+                        grid-template-columns: repeat(2, 1fr);
+                        gap: 1rem;
+      }
+
         }
 
         h3 {

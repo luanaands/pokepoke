@@ -32,12 +32,16 @@ export const Bloc = styled.div`
     margin-top: 2rem;
     padding: 2rem 5rem;
 
+    @media (max-width: 720px) {
+        padding: 2rem 0;
+
+      }
+
     div {
         background: var(--color-secondary);
         color: var(--shape);
         border-radius: 0.35rem;
         text-align: center;
-        width : 300px;
         transition: 0.2s;
         &:hover{
             background: var(--color-secondary-clik);
