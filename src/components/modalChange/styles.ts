@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const Container = styled.form`
    text-align: center;
    div.align {
+      padding: 0 1rem;
       color: var(--color-secondary-clik);
       display: flex;
       justify-content: space-between;
