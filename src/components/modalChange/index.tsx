@@ -26,7 +26,7 @@ interface ModalChangeProps {
 }
 
 export function ModalChange({ users, isOpen, onRequestClose }: ModalChangeProps) {
-    const { addPokemons, selectedPokemons } = usePokemon();
+    const { addPokemons, selectedPokemons, limpaLista } = usePokemon();
 
     function handleSelectedCard(pokemon: Pokemons) {
         addPokemons(pokemon);
@@ -39,7 +39,8 @@ export function ModalChange({ users, isOpen, onRequestClose }: ModalChangeProps)
             .catch(error => {
                 alert("Não foi possível realizar a troca");
             });
-
+            
+        limpaLista();
         onRequestClose();
     }
 
