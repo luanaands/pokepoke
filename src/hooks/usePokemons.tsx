@@ -22,8 +22,8 @@ const PokemonContext = createContext<PokemonsContextData>({} as PokemonsContextD
 
 export function PokemonsProvider({ children }: PokemonsContextProps) {
     const [selectedPokemons, setSelectedPokemons] = useState<Pokemons[]>([]);
-    
-    function limpaLista(){
+
+    function limpaLista() {
         setSelectedPokemons([]);
     }
 
@@ -31,7 +31,7 @@ export function PokemonsProvider({ children }: PokemonsContextProps) {
         if (selectedPokemons.includes(pokemon)) {
             setSelectedPokemons(selectedPokemons.filter(poke => poke !== pokemon));
         } else {
-            if (selectedPokemons.filter(poke => poke.userId === pokemon.userId).length < 4
+            if (selectedPokemons.filter(poke => poke.userId === pokemon.userId).length < 6
                 && !(selectedPokemons.filter(poke => poke.pokemonId === pokemon.pokemonId).length > 0)) {
                 setSelectedPokemons([...selectedPokemons, pokemon]);
             }
